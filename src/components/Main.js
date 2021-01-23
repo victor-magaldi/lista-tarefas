@@ -10,12 +10,34 @@ import { FaEdit, FaWindowClose } from "react-icons/fa";
 export default class Main extends Component {
   state = {
     novaTarefa: "",
-    tarefas: ["café", "beber água"],
+    tarefas: [],
   };
 
   handleChange = (evt) => {
     this.setState({
       novaTarefa: evt.target.value,
+    });
+  };
+  handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    const { tarefas } = this.state;
+    let { novaTarefa } = this.state;
+
+    //essa é um estado que é atualizado sempre quando digita
+    novaTarefa = novaTarefa.trim();
+    //verifica se a tarefa já existe
+    if (tarefas.indexOf(novaTarefa) !== -1) {
+      return;
+    }
+    const tarefaAnteriores = [...tarefas];
+
+    this.setState({
+      tarefas: [...tarefaAnteriores, novaTarefa],
+    });
+    // limpa o estado do campo
+    this.setState({
+      novaTarefa: "",
     });
   };
   render() {
@@ -24,7 +46,7 @@ export default class Main extends Component {
       <div className="main">
         <h1>Lista de Tarefas:{novaTarefa} </h1>
 
-        <form action="#" className="form">
+        <form onSubmit={this.handleSubmit} action="#" className="form">
           <input type="text" onChange={this.handleChange} value={novaTarefa} />
           <button type="submit">
             <FaPlus />
