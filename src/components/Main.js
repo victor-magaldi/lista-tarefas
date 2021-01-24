@@ -11,6 +11,7 @@ export default class Main extends Component {
   state = {
     novaTarefa: "",
     tarefas: [],
+    index: -1,
   };
 
   handleChange = (evt) => {
@@ -21,7 +22,7 @@ export default class Main extends Component {
   handleSubmit = (evt) => {
     evt.preventDefault();
 
-    const { tarefas } = this.state;
+    const { tarefas, index } = this.state;
     let { novaTarefa } = this.state;
 
     //essa é um estado que é atualizado sempre quando digita
@@ -31,19 +32,27 @@ export default class Main extends Component {
       return;
     }
     const tarefaAnteriores = [...tarefas];
+    console.log(this.state);
 
-    this.setState({
-      tarefas: [...tarefaAnteriores, novaTarefa],
-    });
-    // limpa o estado do campo
-    this.setState({
-      novaTarefa: "",
-    });
+    if (index === -1) {
+      this.setState({
+        tarefas: [...tarefaAnteriores, novaTarefa],
+        novaTarefa: "",
+      });
+    } else {
+      console.log("entrou");
+      tarefaAnteriores[index] = novaTarefa;
+      this.setState({
+        tarefas: [...tarefaAnteriores],
+        index: -1,
+      });
+    }
   };
 
   handleEdit = (evt, index) => {
-    console.log(evt);
-    console.log("delete", index);
+    const { tarefas } = this.state;
+    this.setState({ index: index, novaTarefa: tarefas[index] });
+    console.log("edit", index);
   };
   handleDelete = (evt, index) => {
     const { tarefas } = this.state;
@@ -71,7 +80,10 @@ export default class Main extends Component {
             <li key={tarefa}>
               {tarefa}
               <div>
-                <FaEdit className="edit" />
+                <FaEdit
+                  className="edit"
+                  onClick={(e) => this.handleEdit(e, index)}
+                />
                 <FaWindowClose
                   onClick={(e) => this.handleDelete(e, index)}
                   className="delete"
