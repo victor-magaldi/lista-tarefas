@@ -13,6 +13,19 @@ export default class Main extends Component {
     tarefas: [],
     index: -1,
   };
+  // esse metódo é executado quando o componente é renderizado na página
+  componentDidMount() {
+    const tarefas = JSON.parse(localStorage.getItem("tarefas"));
+    if (tarefas) {
+      this.setState({ tarefas: tarefas });
+    }
+  }
+  //esse metodo é chamado sempre que componente tem alguma mudança
+  componentDidUpdate(prevProps, prevStates) {
+    const { tarefas } = this.state;
+    if (prevStates.tarefas === tarefas) return;
+    localStorage.setItem("tarefas", JSON.stringify(tarefas));
+  }
 
   handleChange = (evt) => {
     this.setState({
