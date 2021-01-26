@@ -3,6 +3,7 @@ import "./Main.css";
 
 import Form from "./Form/";
 import Tarefas from "./Tarefas/";
+import Clock from "./Clock/Clock";
 
 export default class Main extends Component {
   state = {
@@ -17,7 +18,6 @@ export default class Main extends Component {
     if (tarefas) {
       this.setState({ tarefas: tarefas });
     }
-    this.intervalID = setInterval(() => this.tick(), 1000);
   }
   //esse metodo é chamado sempre que componente tem alguma mudança
   componentDidUpdate(prevProps, prevStates) {
@@ -72,20 +72,13 @@ export default class Main extends Component {
     });
   };
 
-  componentWillUnmount() {
-    clearInterval(this.intervalID);
-  }
-  tick() {
-    this.setState({
-      time: new Date().toLocaleTimeString("pt-Br"),
-    });
-  }
   render() {
     const { novaTarefa, tarefas, time } = this.state;
     return (
       <div className="main">
         <h1>Lista de Tarefas:{novaTarefa} </h1>
         <h3> horas:{time} </h3>
+        <Clock />
 
         <Form
           handleSubmit={this.handleSubmit}
