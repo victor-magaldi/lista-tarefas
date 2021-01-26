@@ -9,6 +9,7 @@ export default class Main extends Component {
     novaTarefa: "",
     tarefas: [],
     index: -1,
+    time: "",
   };
   // esse metódo é executado quando o componente é renderizado na página
   componentDidMount() {
@@ -16,6 +17,7 @@ export default class Main extends Component {
     if (tarefas) {
       this.setState({ tarefas: tarefas });
     }
+    this.intervalID = setInterval(() => this.tick(), 1000);
   }
   //esse metodo é chamado sempre que componente tem alguma mudança
   componentDidUpdate(prevProps, prevStates) {
@@ -42,7 +44,6 @@ export default class Main extends Component {
       return;
     }
     const tarefaAnteriores = [...tarefas];
-    console.log(this.state);
 
     if (index === -1) {
       this.setState({
@@ -72,11 +73,21 @@ export default class Main extends Component {
       tarefas: [...novasTarefas],
     });
   };
+
+  componentWillUnmount() {
+    clearInterval(this.intervalID);
+  }
+  tick() {
+    this.setState({
+      time: new Date().toLocaleTimeString("pt-Br"),
+    });
+  }
   render() {
-    const { novaTarefa, tarefas } = this.state;
+    const { novaTarefa, tarefas, time } = this.state;
     return (
       <div className="main">
         <h1>Lista de Tarefas:{novaTarefa} </h1>
+        <h3> horas:{time} </h3>
 
         <Form
           handleSubmit={this.handleSubmit}
