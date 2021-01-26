@@ -51,7 +51,6 @@ export default class Main extends Component {
         novaTarefa: "",
       });
     } else {
-      console.log("entrou");
       tarefaAnteriores[index] = novaTarefa;
       this.setState({
         tarefas: [...tarefaAnteriores],
@@ -63,7 +62,6 @@ export default class Main extends Component {
   handleEdit = (evt, index) => {
     const { tarefas } = this.state;
     this.setState({ index: index, novaTarefa: tarefas[index] });
-    console.log("edit", index);
   };
   handleDelete = (evt, index) => {
     const { tarefas } = this.state;
