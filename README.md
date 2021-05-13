@@ -6,7 +6,7 @@ O Projeto foi desenvolvido em um curso, mas alterei e o layout e inseri mais alg
 
 ### `Rodando o Projeto `
 
-Basta apenas ter os instalar as dependências e usar npm start para desenvolver ou npm build para gerar uma build para fazer o deploy.
+Basta apenas instalar as dependências e usar npm start para desenvolver ou npm build para gerar uma build para fazer o deploy.
 
 ### `🚀 Tecnologias `
 
