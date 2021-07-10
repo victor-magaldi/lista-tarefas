@@ -2,7 +2,7 @@
 
 # Sobre
 
-O Projeto foi desenvolvido em um curso, mas alterei e o layout e inseri mais algumas features para tentar melhorar.
+O Projeto foi desenvolvido em um curso, mas alterei e o layout e inseri a feature de relógio para treinar o update de estado por segundo.
 
 ### `Rodando o Projeto `
 
